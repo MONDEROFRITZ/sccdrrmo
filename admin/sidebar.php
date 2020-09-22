@@ -140,7 +140,7 @@ $numberofnewreport = $get_all_newreport_data->rowCount();
               <ul class="nav nav-treeview">
 
                 <li class="nav-item">
-                  <a href="add_individual" class="nav-link">
+                  <a href="list_individual" class="nav-link">
                     &nbsp; &nbsp; &nbsp;<i class="fa fa-share fa-flip-vertical "></i>
                     <p> &nbsp; Individual</p>
                   </a>
