@@ -165,20 +165,20 @@ $get_all_brgy_data->execute();
                                         <div class="row">
                                             <div class="col-md-1"></div>
                                             <div class="col-md-3" style="text-align:center; padding-right:5px;">
-                                                <input type="text" readonly class="form-control" name="firstname" placeholder="First Name" value="<?php echo $firstname; ?>" required>
+                                                <input type="text"  class="form-control" name="firstname" placeholder="First Name" value="<?php echo $firstname; ?>" required>
                                             </div>
                                             <div class="col-md-3">
-                                                <input type="text" readonly class="form-control" name="middlename" placeholder="Middle Name" value="<?php echo $middlename; ?>" required>
+                                                <input type="text"  class="form-control" name="middlename" placeholder="Middle Name" value="<?php echo $middlename; ?>" required>
                                             </div>
                                             <div class="col-md-3">
-                                                <input type="text" readonly class="form-control" name="lastname" placeholder="Last Name" value="<?php echo $lastname; ?>" required>
+                                                <input type="text"  class="form-control" name="lastname" placeholder="Last Name" value="<?php echo $lastname; ?>" required>
                                             </div>
                                         </div><br>
 
                                         <div class="row">
                                             <div class="col-md-1"></div>
                                             <div class="col-md-3" style="text-align:center; padding-right:5px;">
-                                                <input type="number" readonly class="form-control" name="age" placeholder="Age" value="<?php echo $age; ?>" required>
+                                                <input type="number"  class="form-control" name="age" placeholder="Age" value="<?php echo $age; ?>" required>
                                             </div>
                                             <div class="col-md-3 ">
                                                 <select class=" form-control select2" id="gender" name="gender" value="<?php echo $gender; ?>">
@@ -219,8 +219,6 @@ $get_all_brgy_data->execute();
 
                                 <div class="box-footer" align="center">
 
-                                    <button type="button" <?php echo $btnEdit; ?> name="edit" id="btnEdit" class="btn btn-info">
-                                        <i class="fa fa-edit fa-fw"> </i> </button>
 
                                     <button type="submit" <?php echo $btnSave; ?> name="add_pum" id="btnSubmit" class="btn btn-success">
                                         <i class="fa fa-check fa-fw"> </i> </button>
@@ -325,64 +323,10 @@ $get_all_brgy_data->execute();
             //  }
         });
 
-        $(function() {
-            $('.textarea').wysihtml5({
-                toolbar: {
-                    fa: true
-                }
-            })
-        });
-
-        //Date picker
-        $('#datepicker').datepicker({
-            autoclose: true
-        });
-
-        $("#btnSubmit").attr("disabled", true);
-        $(".select2").attr("disabled", true);
-
-        $(document).ready(function() {
-            $('#btnEdit').click(function() {
-                $("input[name='firstname']").removeAttr("readonly");
-                $("input[name='middlename']").removeAttr("readonly");
-                $("input[name='lastname']").removeAttr("readonly");
-                $("input[name='age']").removeAttr("readonly");
-                $("input[name='street']").removeAttr("readonly");
-                $("input[name='city']").removeAttr("readonly");
-                $("input[name='province']").removeAttr("readonly");
-                $("input[name='city0rigin']").removeAttr("readonly");
-                $("input[name='date_arrival']").removeAttr("readonly");
-                $("input[name='contact_number']").removeAttr("readonly");
-                $("input[name='date_process']").removeAttr("readonly");
-                $("input[name='disease']").removeAttr("readonly");
-
-                $(".select2").attr("disabled", false);
-                $("#btnSubmit").attr("disabled", false);
-                $("#btnEdit").attr("disabled", true);
-            });
-        });
+      
 
 
-        
-
-        // $('#btnEdit').on('change',function(){
-        //             var type = $(this).val();
-        //             // var office = $('#department').val();
-
-        //             alert(hello);
-        //             $.ajax({
-        //               type:'POST',
-        //               data:{ },
-        //               url:'generate_pum.php',
-        //               success:function(data){
-        //                 $('#patient_number').val(data);
-
-        //               }
-
-
-        //             });           
-        //     //  }
-        //   });
+      
     </script>
 
 
