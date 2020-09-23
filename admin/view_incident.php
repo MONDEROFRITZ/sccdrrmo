@@ -6,7 +6,7 @@ include ('update_incident.php');
 // include ('get_photo.php');
 session_start();
 $user_id = $_SESSION['id'];
-$loadImage = '';
+
 if (!isset($_SESSION['id'])) {
     header('location:../index.php');
 } else {
@@ -75,7 +75,7 @@ $stmt->execute();
 <html>
 <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>SCCDRRMO | Dashboard</title>
+  <title>SCCDRRMO | Incident Report</title>
   <?php include('header.php');?>
 
 
@@ -89,20 +89,31 @@ $stmt->execute();
   <div class="content-wrapper" align="center">
     <div class="content-header"></div>
 
+    <section class="content" >
+                        <div class="row">
+                          <div class="col-md-8">
+                            <iframe height="100%" width="100%" frameborder="0" src = "https://maps.google.com/maps?q=<?= $latitude ?>,<?= $longitude ?>&hl=es;z=14&amp;output=embed"></iframe>
+                          </div>
+                          <div class="col-md-4">
+                            <div class="card">
+                            
+                              <img class="img-fluid" src="<?php echo (empty($image)) ? '../dist/img/scdrrmo_logo.png' : '../mobile/images/'.$image ; ?>">
+                            </div>
+                          </div>
+                         </div>
+                         <br>
 
-    <section class="content col-md-10" >
-
- 
-        <div class="card card-info "  >
+        <div class="card card-outline card-info"  >
          
                 <div class="card-header ">
-                  <h3>View Incident Details </h3>
+                  <h6>INCIDENT DETAILS</h6>
                 </div>
-                <div class="card-body" align="center">
-               
+
+                <div class="card-body">
+
             
-            <div class="box-body">
-                      
+            <div class="box">
+                          
                           <div class="row"> 
                             <div class="col-md-4" style="text-align: right;padding-top: 5px;">
                               <label>ID No:</label>
@@ -177,15 +188,10 @@ $stmt->execute();
                                
                           <!-- /.box-body -->
                           <div class="box-footer" >
-                              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#mapModal">LOCATION</button>
-
-                              <button type="button" name = "photosubmit" id ="image" class="btn btn-primary">PHOTO</button>
-
-
                               <a href="list_incident.php">
                                 <button type="button" name="cancel" class="btn btn-danger">       
                                 CLOSE </button>
-                            </a>
+                              </a>
                           </div>
 
                     </div>
@@ -198,55 +204,6 @@ $stmt->execute();
 
     </section>
     
-
-
-    <!-- modals here -->
-
-    <div class="modal fade" id="mapModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Map</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="row col-md-12">
-              <iframe width="800" height="340" frameborder="0" src = "https://maps.google.com/maps?q=<?= $latitude ?>,<?= $longitude ?>&hl=es;z=14&amp;output=embed"></iframe>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div  class="modal fade"  id="modal-image">
-    <div class="modal-dialog " role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Photo</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-
-    <img src = "" style = "width:330px;height:350px;"id = "displayImage" class = "img-fluid img-rounded ">
-      </div>
-      <div class="modal-footer">
-      
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-  </div>
-
-
-
-
 
   </div>
   <!-- /.content-wrapper -->
@@ -305,40 +262,6 @@ $stmt->execute();
       'autoHeight'  : true
      
     });
-
-
-
-    
-$('#image').click(function(){
-  $('#modal-image').modal('toggle');
-   var id = $('#objid').val();
-console.log(id);
-  //  $('#displayimage').load('get_photo.php',{image:id
-  // },
-  // function(response, status, xhr) {
-  // if (status == "error") {
-  //     alert(msg + xhr.status + " " + xhr.statusText);
-  //     console.log(msg + xhr.status + " " + xhr.statusText);
-  // }
-  //  )};
-  $.ajax({
-
-    type:"POST",
-    url:'get_photo.php',
-    data:{photo:id},
-    success: function(response){
-      // console.log(response.responseText);
-       var result = jQuery.parseJSON(response);
-       var img = document.getElementById("displayImage");
-      img.src = '../mobile/images/'+result.loadImage;
-      // console.log(response.image);
-    },
-    error: function (xhr, b, c) {
-              console.log("xhr=" + xhr.responseText + " b=" + b.responseText + " c=" + c.responseText);
-            }
-
-  })
-});
    
 </script>
 </body>

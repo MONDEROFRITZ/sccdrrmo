@@ -2,7 +2,7 @@
 <?php
 
 include ('../config/db_config.php');
-session_start();
+include ('verify_admin.php');
 $user_id = $_SESSION['id'];
 
 if (!isset($_SESSION['id'])) {
