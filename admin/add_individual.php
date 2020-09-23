@@ -107,7 +107,7 @@ $get_all_brgy_data->execute();
                                                     <div class="input-group-addon">
                                                         <i class="fa fa-calendar"></i>
                                                     </div>
-                                                    <input type="text" readonly class="form-control pull-right" id="datepicker" name="date_process" placeholder="Date Process" value="<?php echo $now->format('m-d-Y'); ?>">
+                                                    <input type="text" readonly class="form-control pull-right" id="datepicker" name="date_register" placeholder="Date Process" value="<?php echo $now->format('m-d-Y'); ?>">
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
@@ -220,7 +220,7 @@ $get_all_brgy_data->execute();
                                 <div class="box-footer" align="center">
 
 
-                                    <button type="submit" <?php echo $btnSave; ?> name="add_pum" id="btnSubmit" class="btn btn-success">
+                                    <button type="submit" <?php echo $btnSave; ?> name="insert_individual" id="btnSubmit" class="btn btn-success">
                                         <i class="fa fa-check fa-fw"> </i> </button>
 
                                     <a href="add_pum.php">
