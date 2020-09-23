@@ -50,20 +50,7 @@ while ($result = $get_data->fetch(PDO::FETCH_ASSOC)) {
         $data = [];
 		foreach ($listOfPosts as $info) {
            
-            // $info = array(
-            
-              
-            //       'id'               => $id,
-            //       'title'            => $title,
-            //       'author'           => $author,
-            //       'postDate'         => $postdate,
-            //       'image'            => $image,
-            //       'content'          => $content,
-            //       'updatedOn'        => $update_on,
-            //       'status'           => $status,
-            //       'tag'              => $tag
-                
-               // );
+         
         $data[] = $info;
 		 }
          echo json_encode(array('newsfeed'=>$data));

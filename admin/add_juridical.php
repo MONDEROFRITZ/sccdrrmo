@@ -47,7 +47,7 @@ $get_all_health_data->execute();
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>SCCDRRMO ERP | Add PUMs / PUI</title>
+    <title>SCCDRRMO ERP | Add Juridical</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Font Awesome -->
@@ -91,7 +91,7 @@ $get_all_health_data->execute();
             <section class="content">
                 <div class="card">
                     <div class="card-header text-white bg-success">
-                        <h4>Add PUMs / PUIs </h4>
+                        <h4>Add Juridical </h4>
                     </div>
 
                     <div class="card-body">
@@ -101,21 +101,18 @@ $get_all_health_data->execute();
 
                                 <div class="card">
                                     <div class="card-header">
-                                        <h6>REPORT DETAILS</h6>
+                                        <h6>GENERAL INFORMATION</h6>
                                     </div>
                                     <div class="box-body">
                                         <br>
                                         <div class="row">
                                             <div class="col-md-1"></div>
                                             <div class="col-md-3">
-                                                <label>Date Reported: </label>
-                                                <div class="input-group date" data-provide="datepicker">
-                                                    <div class="input-group-addon">
-                                                        <i class="fa fa-calendar"></i>
-                                                    </div>
-                                                    <input type="text" readonly class="form-control pull-right" id="datepicker" name="date_process" placeholder="Date Process" value="<?php echo $now->format('m-d-Y'); ?>">
-                                                </div>
+                                                <label>Entity # : </label>
+                                                <input type="number" readonly class="form-control" name="entity_number" id="patient_number" placeholder="Entity Number" value="<?php echo $patient; ?>" required>
                                             </div>
+
+
                                             <div class="col-md-3">
                                                 <label>Patient # : </label>
                                                 <input type="number" readonly class="form-control" name="patient_number" id="patient_number" placeholder="Patient Number" value="<?php echo $patient; ?>" required>
@@ -182,6 +179,18 @@ $get_all_health_data->execute();
                                             </div>
                                             <div class="col-md-3 ">
                                                 <input type="text" readonly class="form-control" name="province" placeholder="Province" value="<?php echo $province; ?>" required>
+                                            </div>
+                                        </div><br>
+                                        <div class="row">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-3">
+                                                <label>Date Reported: </label>
+                                                <div class="input-group date" data-provide="datepicker">
+                                                    <div class="input-group-addon">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </div>
+                                                    <input type="text" readonly class="form-control pull-right" id="datepicker" name="date_process" placeholder="Date Process" value="<?php echo $now->format('m-d-Y'); ?>">
+                                                </div>
                                             </div>
                                         </div><br>
                                     </div>

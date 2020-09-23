@@ -72,7 +72,7 @@ function updateUser(){
         lastname            = :lname,
         birthdate           = :bday,
         mobileno            = :mobileno,
-        address             = :address,
+        address             = :address
         WHERE id            = :userid";
         
 
