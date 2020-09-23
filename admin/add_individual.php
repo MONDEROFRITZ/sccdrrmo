@@ -2,7 +2,7 @@
 
 include('../config/db_config.php');
 include('sql_queries.php');
-include('generate_pum.php');
+include('generate_id.php');
 
 
 
@@ -21,22 +21,16 @@ $now = new DateTime();
 
 $btnSave = $btnEdit = $firstname = $middlename = $lastname = $age = $gender =
     $brgy = $street = $city = $province = $city_origin = $date_arrival = $contact_number =
-    $travel_days = $patient_disease = $symptoms = $health_status = $patient = '';
+    $travel_days = $patient_disease = $symptoms = $health_status = $id = '';
 $btnNew = 'hidden';
 
-
-$get_all_symptoms_sql = "SELECT * FROM tbl_symptoms where status ='Active'";
-$get_all_symptoms_data = $con->prepare($get_all_symptoms_sql);
-$get_all_symptoms_data->execute();
 
 $get_all_brgy_sql = "SELECT * FROM tbl_barangay";
 $get_all_brgy_data = $con->prepare($get_all_brgy_sql);
 $get_all_brgy_data->execute();
 
 
-$get_all_health_sql = "SELECT * FROM tbl_health";
-$get_all_health_data = $con->prepare($get_all_health_sql);
-$get_all_health_data->execute();
+
 
 ?>
 
@@ -91,7 +85,7 @@ $get_all_health_data->execute();
             <section class="content">
                 <div class="card">
                     <div class="card-header text-white bg-success">
-                        <h4>Add PUMs / PUIs </h4>
+                        <h4>Registration Form </h4>
                     </div>
 
                     <div class="card-body">
@@ -101,14 +95,14 @@ $get_all_health_data->execute();
 
                                 <div class="card">
                                     <div class="card-header">
-                                        <h6>REPORT DETAILS</h6>
+                                        <h6>Details</h6>
                                     </div>
                                     <div class="box-body">
                                         <br>
                                         <div class="row">
                                             <div class="col-md-1"></div>
                                             <div class="col-md-3">
-                                                <label>Date Reported: </label>
+                                                <label>Date Registered: </label>
                                                 <div class="input-group date" data-provide="datepicker">
                                                     <div class="input-group-addon">
                                                         <i class="fa fa-calendar"></i>
@@ -117,8 +111,8 @@ $get_all_health_data->execute();
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
-                                                <label>Patient # : </label>
-                                                <input type="number" readonly class="form-control" name="patient_number" id="patient_number" placeholder="Patient Number" value="<?php echo $patient; ?>" required>
+                                                <label>ID : </label>
+                                                <input type="text" readonly class="form-control" name="id" id="id" placeholder="Registration Number" value="<?php echo $id; ?>" required>
                                             </div>
 
 
@@ -133,7 +127,39 @@ $get_all_health_data->execute();
                                 <div class="card">
                                     <div class="card-header">
                                         <h6>PERSONAL INFORMATION</h6>
-                                    </div>
+
+                                        <div class="container">
+    <h1 class="text-center">Capture webcam image</h1>
+   
+    <form method="POST" action="storeImage.php">
+        <div class="row">
+            <div class="col-md-6">
+                <div id="my_camera"></div>
+                <br/>
+                <input type=button value="Take Snapshot" onClick="take_snapshot()">
+                <input type="hidden" name="image" class="image-tag">
+            </div>
+            <div class="col-md-6">
+                <div id="results">Your captured image will appear here...</div>
+            </div>
+            <div class="col-md-12 text-center">
+                <br/>
+                <button class="btn btn-success">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+                                     
+                        </div>
+                        <div class ="row">
+                        <div class = "col-12" style="margin-left:180px;margin-right:100px;">
+                         <input type="file" name="myFiles" id="fileToUpload" onchange = "loadImage()">
+
+                            
+                            </div>
+                        </div>
+
+                                    
                                     <div class="box-body">
                                         <br>
                                         <div class="row">
@@ -178,93 +204,16 @@ $get_all_health_data->execute();
                                             </div>
 
                                             <div class="col-md-3 ">
-                                                <input type="text" readonly class="form-control" name="city" placeholder="City / Municipality" value="<?php echo $city; ?>" required>
+                                                <input type="text" readonly class="form-control" name="city" placeholder="City / Municipality" value="SAN CARLOS CITY" required>
                                             </div>
                                             <div class="col-md-3 ">
-                                                <input type="text" readonly class="form-control" name="province" placeholder="Province" value="<?php echo $province; ?>" required>
+                                                <input type="text" readonly class="form-control" name="province" placeholder="Province" value="NEGROS OCCIDENTAL" required>
                                             </div>
                                         </div><br>
                                     </div>
                                 </div>
 
-                                <!-- travel history -->
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h6>TRAVEL HISTORY</h6>
-                                    </div>
-                                    <div class="box-body">
-                                        <br>
-                                        <div class="row">
-                                            <div class="col-md-1"></div>
-                                            <div class="col-md-3" style="text-align:center; padding-right:5px;">
-                                                <input type="text" readonly class="form-control" name="city0rigin" placeholder="City of Origin" value="<?php echo $city_origin; ?>" required>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="input-group date" data-provide="datepicker">
-                                                    <div class="input-group-addon">
-                                                        <i class="fa fa-calendar"></i>
-                                                    </div>
-                                                    <input type="text" readonly class="form-control pull-right" id="datepicker" name="date_arrival" placeholder="Date Arrival" value="<?php echo $now->format('m-d-Y'); ?>">
-                                                </div>
-                                            </div>
-                                        </div><br>
 
-                                        <div class="row">
-                                            <div class="col-md-1"></div>
-                                            <div class="col-md-3">
-                                                <input type="number" readonly class="form-control" name="contact_number" placeholder="Contact Number" value="<?php echo $contact_number; ?>" required>
-                                            </div>
-
-                                            <div class="col-md-3">
-                                                <select class=" form-control select2" id="travel_days" name="travel_days" value="<?php echo $travel_days; ?>">
-                                                    <option selected="selected">Traveled during the past 14 days?</option>
-                                                    <option value="Yes">Yes</option>
-                                                    <option value="No">No</option>
-                                                </select>
-                                            </div>
-                                        </div><br>
-
-                                    </div>
-                                </div>
-
-                                <!--  -->
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h6>HEALTH HISTORY</h6>
-                                    </div>
-                                    <div class="box-body">
-                                        <br>
-                                        <div class="row">
-                                            <div class="col-md-1"></div>
-
-                                            <div class="col-md-3">
-                                                <input type="text" readonly class="form-control" name="disease" placeholder="Patient's Disease" value="<?php echo $patient_disease; ?>" required>
-                                            </div>
-                                            <div class="col-md-6" style="text-align:center; padding-right:5px;">
-                                                <select class="form-control select2" id="symptoms" style="width: 100%;" multiple="" name="symptoms[]" placeholder="Select Symptoms" svalue="<?php echo $symptoms; ?>">
-
-                                                    <?php while ($get_symptoms = $get_all_symptoms_data->fetch(PDO::FETCH_ASSOC)) { ?>
-                                                        <option value="<?php echo $get_symptoms['symptoms']; ?>"><?php echo $get_symptoms['symptoms']; ?></option>
-                                                    <?php } ?>
-                                                </select>
-                                            </div>
-                                        </div><br>
-
-                                        <div class="row">
-                                            <div class="col-md-1"></div>
-                                            <div class="col-md-3" style="text-align:center; padding-right:5px;">
-                                                <select class="form-control select2" id="heath_status" style="width: 100%;" name="health_status" value="<?php echo $health_status; ?>">
-                                                    <option selected="selected">Health Status</option>
-                                                    <?php while ($get_health = $get_all_health_data->fetch(PDO::FETCH_ASSOC)) { ?>
-                                                        <option value="<?php echo $get_health['health_status']; ?>"><?php echo $get_health['health_status']; ?></option>
-                                                    <?php } ?>
-                                                </select>
-                                            </div>
-                                        </div><br>
-
-
-                                    </div>
-                                </div>
 
 
 
@@ -331,7 +280,29 @@ $get_all_health_data->execute();
     <!-- Select2 -->
     <script src="../plugins/select2/select2.full.min.js"></script>
     <!-- textarea wysihtml style -->
-    <script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="jpeg_camera/jpeg_camera_with_dependencies.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+<script language="JavaScript">
+    Webcam.set({
+        width: 490,
+        height: 390,
+        image_format: 'jpeg',
+        jpeg_quality: 90
+    });
+  
+    Webcam.attach( '#my_camera' );
+  
+    function take_snapshot() {
+        Webcam.snap( function(data_uri) {
+            $(".image-tag").val(data_uri);
+            document.getElementById('results').innerHTML = '<img src="'+data_uri+'"/>';
+        } );
+    }
+
+
         $('.select2').select2();
 
 
@@ -390,6 +361,9 @@ $get_all_health_data->execute();
                 $("#btnEdit").attr("disabled", true);
             });
         });
+
+
+        
 
         // $('#btnEdit').on('change',function(){
         //             var type = $(this).val();

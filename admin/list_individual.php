@@ -69,6 +69,9 @@ $get_all_symptoms_data->execute();
         <div class="card card-info">
           <div class="card-header  text-white bg-success">
             <h4> Master Lists Individual
+
+            <a href="add_individual" style="float:right;" type="button" class="btn btn-info bg-gradient-info" style="border-radius: 0px;">
+                <i class="nav-icon fa fa-plus-square"></i></a>
             </h4>
 
           </div>
@@ -101,11 +104,11 @@ $get_all_symptoms_data->execute();
                           <tr align="center">
                             <td><?php echo $list_individual['id'];  ?></td>
                       
-                            <td><?php echo $list_individual['first_name'];
+                            <td><?php echo $list_individual['firstname'];
                                 echo " ";
-                                echo $list_individual['middle_name'];
+                                echo $list_individual['middlename'];
                                 echo " ";
-                                echo $list_individual['last_name']; ?> </td>
+                                echo $list_individual['lastname']; ?> </td>
                             <td><?php echo $list_individual['address']; ?> </td>
                             <td><?php echo $list_individual['contact_no']; ?></td>
                             <td>
